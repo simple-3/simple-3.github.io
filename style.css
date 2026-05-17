@@ -1,6 +1,10 @@
 /* ===== Global Styles ===== */
 body {
-    font-family: Arial, sans-serif; /* Revert font */
+    
+    .press-start-2p-regular {
+    font-family: "Press Start 2P", system-ui;
+    font-weight: 400;
+    font-style: normal;
     background: #1a1a3d; /* Dark blue/purple background */
     color: white;
     margin: 0;
@@ -8,7 +12,8 @@ body {
     text-align: center;
     min-height: 100vh;
     font-size: 18px;
-}
+    }
+    }
 
 body.home-page {
     --sidebar-collapsed: 76px;

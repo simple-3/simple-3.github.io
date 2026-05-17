@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Settings | Backdoor Labs</title>
+<link rel="icon" type="image/png" href="game%20logos/logo.png">
+<script>
+(() => {
+    const disguised = localStorage.getItem("backdoorlabs_tab_disguise") === "google";
+    const favicon = document.querySelector('link[rel="icon"]');
+    document.title = disguised ? "Google" : "Settings | Backdoor Labs";
+    if (favicon) {
+        favicon.href = disguised ? "game%20logos/google.png" : "game%20logos/logo.png";
+    }
+})();
+</script>
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body class="home-page stats-page">
+
+<aside class="sidebar" aria-label="Game categories">
+    <nav class="sidebar-nav">
+        <button class="sidebar-link" id="navHome" type="button" onclick="window.location.href='index.html'">
+            <span class="sidebar-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" focusable="false">
+                    <path d="M12 4 3 11h2v9h5v-6h4v6h5v-9h2z"></path>
+                </svg>
+            </span>
+            <span class="sidebar-label">Home</span>
+        </button>
+        <button class="sidebar-link" id="navRecentlyPlayed" type="button" onclick="window.location.href='recently-played.html'">
+            <span class="sidebar-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" focusable="false">
+                    <path d="M12 7a1 1 0 0 1 1 1v3.59l2.7 2.7a1 1 0 1 1-1.4 1.41l-3-3A1 1 0 0 1 11 12V8a1 1 0 0 1 1-1zm0-5a10 10 0 1 1 0 20 10 10 0 0 1 0-20z"></path>
+                </svg>
+            </span>
+            <span class="sidebar-label">Recently Played</span>
+        </button>
+        <button class="sidebar-link" id="navFavourites" type="button" onclick="window.location.href='favourites.html'">
+            <span class="sidebar-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" focusable="false">
+                    <path d="m12 18.2-5.29 3.12 1.4-5.98-4.64-4.02 6.12-.52L12 5.2l2.41 5.6 6.12.52-4.64 4.02 1.4 5.98z"></path>
+                </svg>
+            </span>
+            <span class="sidebar-label">Favourites</span>
+        </button>
+        <button class="sidebar-link" id="navSoundEffects" type="button" onclick="window.location.href='sound-effects.html'">
+            <span class="sidebar-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" focusable="false">
+                    <path d="M5 9v6h4l5 4V5l-5 4zm11.5 3a4.5 4.5 0 0 0-2.5-4.03v8.06A4.5 4.5 0 0 0 16.5 12zm0-8.5v2.06a7 7 0 0 1 0 12.88v2.06a9 9 0 0 0 0-17z"></path>
+                </svg>
+            </span>
+            <span class="sidebar-label">Sound Effects</span>
+        </button>
+        <button class="sidebar-link" id="navStats" type="button" onclick="window.location.href='stats.html'">
+            <span class="sidebar-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" focusable="false">
+                    <path d="M5 19h14v2H5zm1-3h3V8H6zm5 0h3V4h-3zm5 0h3v-6h-3z"></path>
+                </svg>
+            </span>
+            <span class="sidebar-label">Stats</span>
+        </button>
+        <button class="sidebar-link active" id="navSettings" type="button" onclick="window.location.href='settings.html'">
+            <span class="sidebar-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" focusable="false">
+                    <path d="M19.14 12.94a7.43 7.43 0 0 0 .05-.94 7.43 7.43 0 0 0-.05-.94l2.03-1.58a.5.5 0 0 0 .12-.64l-1.92-3.32a.5.5 0 0 0-.6-.22l-2.39.96a7.28 7.28 0 0 0-1.63-.94l-.36-2.54a.5.5 0 0 0-.5-.42h-3.84a.5.5 0 0 0-.5.42l-.36 2.54a7.28 7.28 0 0 0-1.63.94l-2.39-.96a.5.5 0 0 0-.6.22L2.71 8.84a.5.5 0 0 0 .12.64l2.03 1.58a7.43 7.43 0 0 0-.05.94 7.43 7.43 0 0 0 .05.94l-2.03 1.58a.5.5 0 0 0-.12.64l1.92 3.32a.5.5 0 0 0 .6.22l2.39-.96c.5.39 1.05.71 1.63.94l.36 2.54a.5.5 0 0 0 .5.42h3.84a.5.5 0 0 0 .5-.42l.36-2.54c.58-.23 1.13-.55 1.63-.94l2.39.96a.5.5 0 0 0 .6-.22l1.92-3.32a.5.5 0 0 0-.12-.64zM12 15.5A3.5 3.5 0 1 1 12 8.5a3.5 3.5 0 0 1 0 7z"></path>
+                </svg>
+            </span>
+            <span class="sidebar-label">Settings</span>
+        </button>
+    </nav>
+
+</aside>
+
+<div class="page-shell">
+    <div class="topbar">
+        <button class="topbar-logo-btn" type="button" onclick="window.location.href='index.html'">
+            <img class="topbar-logo" src="game%20logos/logo.png" alt="Backdoor Labs logo">
+        </button>
+        <button class="title home-title" type="button" onclick="window.location.href='index.html'">Backdoor Labs</button>
+        <input type="text" id="searchBar" placeholder="Search All Games...">
+        <a id="requestGameBtn" href="https://forms.gle/CmgoCdT6N45yGPHN9" target="_blank" rel="noopener noreferrer">Request A Game</a>
+        <button id="topbarDisguiseBtn" type="button">Disguise Tab</button>
+    </div>
+
+    <main class="settings-main">
+        <section class="settings-panel" aria-labelledby="settingsHeading">
+            <div class="settings-list">
+                <div class="settings-row is-danger">
+                    <div>
+                        <div class="settings-row-label">Clear Recently Played</div>
+                    </div>
+                    <button class="settings-action-btn" id="clearRecentlyPlayedBtn" type="button">Clear</button>
+                </div>
+                <div class="settings-row is-danger">
+                    <div>
+                        <div class="settings-row-label">Clear Favourites</div>
+                    </div>
+                    <button class="settings-action-btn" id="clearFavouritesBtn" type="button">Clear</button>
+                </div>
+                <div class="settings-row is-danger">
+                    <div>
+                        <div class="settings-row-label" id="settingsHeading">Clear Stats</div>
+                    </div>
+                    <button class="settings-action-btn" id="resetStatsBtn" type="button">Clear</button>
+                </div>
+            </div>
+        </section>
+    </main>
+</div>
+
+<script>
+const TAB_DISGUISE_KEY = "backdoorlabs_tab_disguise";
+const RECENTS_KEY = "recentGames";
+const FAVORITES_KEY = "favoriteGames";
+const STATS_KEY = "backdoorlabs_stats";
+let searchTimer = null;
+const searchBar = document.getElementById("searchBar");
+const topbarDisguiseBtn = document.getElementById("topbarDisguiseBtn");
+const clearRecentlyPlayedBtn = document.getElementById("clearRecentlyPlayedBtn");
+const clearFavouritesBtn = document.getElementById("clearFavouritesBtn");
+const resetStatsBtn = document.getElementById("resetStatsBtn");
+
+function isTabDisguised() {
+    return localStorage.getItem(TAB_DISGUISE_KEY) === "google";
+}
+
+function applyTabDisguise() {
+    document.title = isTabDisguised() ? "Google" : "Settings | Backdoor Labs";
+    const favicon = document.querySelector('link[rel="icon"]');
+    if (favicon) {
+        favicon.href = isTabDisguised() ? "game%20logos/google.png" : "game%20logos/logo.png";
+    }
+}
+
+function updateDisguiseTabButton() {
+    if (!topbarDisguiseBtn) return;
+    topbarDisguiseBtn.textContent = isTabDisguised() ? "Undisguise Tab" : "Disguise Tab";
+}
+
+function openSearchResults() {
+    const query = searchBar ? searchBar.value.trim() : "";
+    const suffix = query ? `?search=${encodeURIComponent(query)}` : "";
+    window.location.href = `index.html${suffix}`;
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+    applyTabDisguise();
+    updateDisguiseTabButton();
+
+    if (searchBar) {
+        searchBar.addEventListener("input", () => {
+            window.clearTimeout(searchTimer);
+            searchTimer = window.setTimeout(openSearchResults, 350);
+        });
+
+        searchBar.addEventListener("keydown", (event) => {
+            if (event.key === "Enter") {
+                event.preventDefault();
+                window.clearTimeout(searchTimer);
+                openSearchResults();
+            }
+        });
+    }
+    if (topbarDisguiseBtn) {
+        topbarDisguiseBtn.addEventListener("click", () => {
+            if (isTabDisguised()) {
+                localStorage.removeItem(TAB_DISGUISE_KEY);
+            } else {
+                localStorage.setItem(TAB_DISGUISE_KEY, "google");
+            }
+            applyTabDisguise();
+            updateDisguiseTabButton();
+        });
+    }
+    if (clearRecentlyPlayedBtn) {
+        clearRecentlyPlayedBtn.addEventListener("click", () => {
+            localStorage.removeItem(RECENTS_KEY);
+        });
+    }
+    if (clearFavouritesBtn) {
+        clearFavouritesBtn.addEventListener("click", () => {
+            localStorage.removeItem(FAVORITES_KEY);
+        });
+    }
+
+    if (resetStatsBtn) {
+        resetStatsBtn.addEventListener("click", () => {
+            localStorage.removeItem(STATS_KEY);
+        });
+    }
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,1215 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Recently Played | Backdoor Labs</title>
+<link rel="icon" type="image/png" href="game%20logos/logo.png">
+<script>
+(() => {
+    const disguised = localStorage.getItem("backdoorlabs_tab_disguise") === "google";
+    const favicon = document.querySelector('link[rel="icon"]');
+    document.title = disguised ? "Google" : "Recently Played | Backdoor Labs";
+    if (favicon) {
+        favicon.href = disguised ? "game%20logos/google.png" : "game%20logos/logo.png";
+    }
+})();
+</script>
+<link rel="stylesheet" href="style.css">
+<script src="game-categories.js"></script>
+</head>
+
+<body class="home-page recent-page favourites-page">
+
+<aside class="sidebar" aria-label="Game categories">
+    <nav class="sidebar-nav">
+        <button class="sidebar-link" id="navHome" type="button" onclick="window.location.href='index.html'">
+            <span class="sidebar-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" focusable="false">
+                    <path d="M12 4 3 11h2v9h5v-6h4v6h5v-9h2z"></path>
+                </svg>
+            </span>
+            <span class="sidebar-label">Home</span>
+        </button>
+        <button class="sidebar-link active" id="navRecentlyPlayed" type="button" onclick="window.location.href='recently-played.html'">
+            <span class="sidebar-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" focusable="false">
+                    <path d="M12 7a1 1 0 0 1 1 1v3.59l2.7 2.7a1 1 0 1 1-1.4 1.41l-3-3A1 1 0 0 1 11 12V8a1 1 0 0 1 1-1zm0-5a10 10 0 1 1 0 20 10 10 0 0 1 0-20z"></path>
+                </svg>
+            </span>
+            <span class="sidebar-label">Recently Played</span>
+        </button>
+        <button class="sidebar-link" id="navFavourites" type="button" onclick="window.location.href='favourites.html'">
+            <span class="sidebar-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" focusable="false">
+                    <path d="m12 18.2-5.29 3.12 1.4-5.98-4.64-4.02 6.12-.52L12 5.2l2.41 5.6 6.12.52-4.64 4.02 1.4 5.98z"></path>
+                </svg>
+            </span>
+            <span class="sidebar-label">Favourites</span>
+        </button>
+        <button class="sidebar-link" id="navSoundEffects" type="button" onclick="window.location.href='sound-effects.html'">
+            <span class="sidebar-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" focusable="false">
+                    <path d="M5 9v6h4l5 4V5l-5 4zm11.5 3a4.5 4.5 0 0 0-2.5-4.03v8.06A4.5 4.5 0 0 0 16.5 12zm0-8.5v2.06a7 7 0 0 1 0 12.88v2.06a9 9 0 0 0 0-17z"></path>
+                </svg>
+            </span>
+            <span class="sidebar-label">Sound Effects</span>
+        </button>
+        <button class="sidebar-link" id="navStats" type="button" onclick="window.location.href='stats.html'">
+            <span class="sidebar-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" focusable="false">
+                    <path d="M5 19h14v2H5zm1-3h3V8H6zm5 0h3V4h-3zm5 0h3v-6h-3z"></path>
+                </svg>
+            </span>
+            <span class="sidebar-label">Stats</span>
+        </button>
+        <button class="sidebar-link" id="navSettings" type="button" onclick="window.location.href='settings.html'">
+            <span class="sidebar-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" focusable="false">
+                    <path d="M19.14 12.94a7.43 7.43 0 0 0 .05-.94 7.43 7.43 0 0 0-.05-.94l2.03-1.58a.5.5 0 0 0 .12-.64l-1.92-3.32a.5.5 0 0 0-.6-.22l-2.39.96a7.28 7.28 0 0 0-1.63-.94l-.36-2.54a.5.5 0 0 0-.5-.42h-3.84a.5.5 0 0 0-.5.42l-.36 2.54a7.28 7.28 0 0 0-1.63.94l-2.39-.96a.5.5 0 0 0-.6.22L2.71 8.84a.5.5 0 0 0 .12.64l2.03 1.58a7.43 7.43 0 0 0-.05.94 7.43 7.43 0 0 0 .05.94l-2.03 1.58a.5.5 0 0 0-.12.64l1.92 3.32a.5.5 0 0 0 .6.22l2.39-.96c.5.39 1.05.71 1.63.94l.36 2.54a.5.5 0 0 0 .5.42h3.84a.5.5 0 0 0 .5-.42l.36-2.54c.58-.23 1.13-.55 1.63-.94l2.39.96a.5.5 0 0 0 .6-.22l1.92-3.32a.5.5 0 0 0-.12-.64zM12 15.5A3.5 3.5 0 1 1 12 8.5a3.5 3.5 0 0 1 0 7z"></path>
+                </svg>
+            </span>
+            <span class="sidebar-label">Settings</span>
+        </button>
+    </nav>
+
+</aside>
+
+<div class="page-shell">
+
+<!-- ===== Top Bar ===== -->
+<div class="topbar">
+    <button class="topbar-logo-btn" type="button" onclick="window.location.href='index.html'">
+        <img class="topbar-logo" src="game%20logos/logo.png" alt="Backdoor Labs logo">
+    </button>
+    <button class="title home-title" type="button" onclick="window.location.href='index.html'">Backdoor Labs</button>
+    <input 
+        type="text" 
+        id="searchBar" 
+        placeholder="Search recently played..."
+        onkeyup="searchGames()"
+    >
+    <a id="requestGameBtn" href="https://forms.gle/CmgoCdT6N45yGPHN9" target="_blank" rel="noopener noreferrer">Request A Game</a>
+    <button id="topbarDisguiseBtn" type="button">Disguise Tab</button>
+</div>
+
+<!-- ===== Games Grid ===== -->
+<div class="all-games">
+    <h2 id="pageTitle">Recently Played</h2>
+    <div class="all-games-actions" style="display: none;">
+        <button id="disguiseTabBtn" type="button">Disguise Tab</button>
+        <div class="games-sort-wrap">
+            <select id="sortSelect" onchange="sortGames()">
+                <option value="" selected>All Categories</option>
+            </select>
+        </div>
+    </div>
+</div>
+<div class="games">
+
+<a href="games/slope.html" class="game has-logo">
+<img src="game%20logos/slope.png" alt="Slope logo">
+<p>Slope</p>
+</a>
+
+<a href="games/2048.html" class="game has-logo">
+<img src="game%20logos/2048.png" alt="2048 logo">
+<p>2048</p>
+</a>
+
+<a href="games/moto-x3m.html" class="game has-logo">
+<img src="game%20logos/moto-x3m.png" alt="Moto X3M logo">
+<p>Moto X3M</p>
+</a>
+
+<a href="games/basket-random.html" class="game has-logo">
+<img src="game%20logos/basket-random.png" alt="Basket Random logo">
+<p>Basket Random</p>
+</a>
+
+<a href="games/run-3.html" class="game has-logo">
+<img src="game%20logos/run-3.png" alt="Run 3 logo">
+<p>Run 3</p>
+</a>
+
+<a href="games/granny.html" class="game has-logo">
+<img src="game%20logos/granny.png" alt="Granny logo">
+<p>Granny</p>
+</a>
+
+<a href="games/baldi's-basics.html" class="game has-logo">
+<img src="game%20logos/baldis-basics.png" alt="Baldi's Basics logo">
+<p>Baldi's Basics</p>
+</a>
+
+<a href="games/bitlife.html" class="game has-logo">
+<img src="game%20logos/bitlife.png" alt="Bitlife logo">
+<p>Bitlife</p>
+</a>
+
+<a href="games/papas-pizzaria.html" class="game has-logo">
+<img src="game%20logos/papas-pizzeria.png" alt="Papa's Pizzeria logo">
+<p>Papa's Pizzeria</p>
+</a>
+
+<a href="games/retro-bowl.html" class="game has-logo">
+<img src="game%20logos/retro-bowl.png" alt="Retro Bowl logo">
+<p>Retro Bowl</p>
+</a>
+
+<a href="games/monkey-mart.html" class="game has-logo">
+<img src="game%20logos/monkey-mart.png" alt="Monkey Mart logo">
+<p>Monkey Mart</p>
+</a>
+
+<a href="games/crossy-road.html" class="game has-logo">
+<img src="game%20logos/crossy-road.png" alt="Crossy Road logo">
+<p>Crossy Road</p>
+</a>
+
+<a href="games/wordle.html" class="game has-logo">
+<img src="game%20logos/wordle.png" alt="Wordle logo">
+<p>Wordle</p>
+</a>
+
+<a href="games/five-nights-at-epstein's.html" class="game has-logo">
+<img src="game%20logos/five-nights-at-epsteins.png" alt="Five Nights at Epsteins logo">
+<p>Five Nights at Epstein's</p>
+</a>
+
+<a href="games/geometry-dash-subzero.html" class="game has-logo">
+<img src="game%20logos/geometry-dash-subzero.png" alt="Geometry Dash SubZero logo">
+<p>Geometry Dash SubZero</p>
+</a>
+
+<a href="games/block-blast.html" class="game has-logo">
+<img src="game%20logos/block-blast.png" alt="Block Blast logo">
+<p>Block Blast</p>
+</a>
+
+<a href="games/plants-vs-zombies.html" class="game has-logo">
+<img src="game%20logos/plants-vs-zombies.png" alt="Plants vs Zombies logo">
+<p>Plants vs Zombies</p>
+</a>
+
+<a href="games/subway-surfers.html" class="game has-logo">
+<img src="game%20logos/subway-surfers.png" alt="Subway Surfers logo">
+<p>Subway Surfers</p>
+</a>
+
+<a href="games/btd1.html" class="game has-logo">
+<img src="game%20logos/btd1.png" alt="Bloons Tower Defense 1 logo">
+<p>Bloons Tower Defense 1</p>
+</a>
+
+<a href="games/btd2.html" class="game has-logo">
+<img src="game%20logos/btd2.png" alt="Bloons Tower Defense 2 logo">
+<p>Bloons Tower Defense 2</p>
+</a>
+
+<a href="games/btd3.html" class="game has-logo">
+<img src="game%20logos/btd3.png" alt="Bloons Tower Defense 3 logo">
+<p>Bloons Tower Defense 3</p>
+</a>
+
+<a href="games/btd4.html" class="game has-logo">
+<img src="game%20logos/btd4.png" alt="Bloons Tower Defense 4 logo">
+<p>Bloons Tower Defense 4</p>
+</a>
+
+<a href="games/btd5.html" class="game has-logo">
+<img src="game%20logos/btd5.webp" alt="Bloons Tower Defense 5 logo">
+<p>Bloons Tower Defense 5</p>
+</a>
+
+<a href="games/fnaf1.html" class="game has-logo">
+<img src="game%20logos/fnaf1.png" alt="Five Nights at Freddy's 1 logo">
+<p>Five Nights at Freddy's 1</p>
+</a>
+
+<a href="games/drive-mad.html" class="game has-logo">
+<img src="game%20logos/drive-mad.png" alt="Drive Mad logo">
+<p>Drive Mad</p>
+</a>
+
+<a href="games/fnaf2.html" class="game has-logo">
+<img src="game%20logos/fnaf2.png" alt="FNAF 2 logo">
+<p>Five Nights at Freddy's 2</p>
+</a>
+
+<a href="games/fnaf3.html" class="game has-logo">
+<img src="game%20logos/fnaf3.png" alt="FNAF 3 logo">
+<p>Five Nights at Freddy's 3</p>
+</a>
+
+<a href="games/fnaf4.html" class="game has-logo">
+<img src="game%20logos/fnaf4.png" alt="FNAF 4 logo">
+<p>Five Nights at Freddy's 4</p>
+</a>
+
+<a href="games/soccer-random.html" class="game has-logo">
+<img src="game%20logos/soccer-random.png" alt="Soccer Random logo">
+<p>Soccer Random</p>
+</a>
+
+<a href="games/boxing-random.html" class="game has-logo">
+<img src="game%20logos/boxing-random.png" alt="Boxing Random logo">
+<p>Boxing Random</p>
+</a>
+
+<a href="games/volley-random.html" class="game has-logo">
+<img src="game%20logos/volley-random.png" alt="Volley Random logo">
+<p>Volley Random</p>
+</a>
+
+<a href="games/adventure-capatilist.html" class="game has-logo">
+<img src="game%20logos/adventurre-capatilist.png" alt="Adventure Capitalist logo">
+<p>Adventure Capitalist</p>
+</a>
+
+<a href="games/happy-wheels.html" class="game has-logo">
+<img src="game%20logos/happy-wheels.png" alt="Happy Wheels logo">
+<p>Happy Wheels</p>
+</a>
+
+<a href="games/minecraft.html" class="game has-logo">
+<img src="game%20logos/minecraft.png" alt="Minecraft logo">
+<p>Minecraft</p>
+</a>
+
+<a href="games/wheelie-life.html" class="game has-logo">
+<img src="game%20logos/wheelie-life.png" alt="Wheelie Life logo">
+<p>Wheelie Life</p>
+</a>
+
+<a href="games/tiny-fishing.html" class="game has-logo">
+<img src="game%20logos/tiny-fishing.png" alt="Tiny Fishing logo">
+<p>Tiny Fishing</p>
+</a>
+
+<a href="games/melon-sandbox.html" class="game has-logo">
+<img src="game%20logos/melon-sandbox.png" alt="Melon Sandbox logo">
+<p>Melon Sandbox</p>
+</a>
+
+<a href="games/snow-rider-3d.html" class="game has-logo">
+<img src="game%20logos/snow-rider-3d.png" alt="Snow Rider 3D logo">
+<p>Snow Rider 3D</p>
+</a>
+
+<a href="games/drift-boss.html" class="game has-logo">
+<img src="game%20logos/drift-boss.png" alt="Drift Boss logo">
+<p>Drift Boss</p>
+</a>
+
+<a href="games/among-us.html" class="game has-logo">
+<img src="game%20logos/among-us.png" alt="Among Us logo">
+<p>Among Us</p>
+</a>
+
+<a href="games/little-alchemy-2.html" class="game has-logo">
+<img src="game%20logos/little-alchemy-2.png" alt="Little Alchemy 2 logo">
+<p>Little Alchemy 2</p>
+</a>
+
+<a href="games/1v1-lol.html" class="game has-logo">
+<img src="game%20logos/1v1-lol.png" alt="1v1 LOL logo">
+<p>1v1 LOL</p>
+</a>
+
+<a href="games/cookie-clicker.html" class="game has-logo">
+<img src="game%20logos/cookie-clicker.png" alt="Cookie Clicker logo">
+<p>Cookie Clicker</p>
+</a>
+
+<a href="games/ultrakill.html" class="game has-logo">
+<img src="game%20logos/ultrakill.png" alt="UltraKill logo">
+<p>UltraKill</p>
+</a>
+
+<a href="games/rocket-league.html" class="game has-logo">
+<img src="game%20logos/rocket-league.png" alt="Rocket League logo">
+<p>Rocket League</p>
+</a>
+
+<a href="games/crazy-cattle-3d.html" class="game has-logo">
+<img src="game%20logos/crazy-cattle-3d.png" alt="Crazy Cattle 3D logo">
+<p>Crazy Cattle 3D</p>
+</a>
+
+<a href="games/terraria.html" class="game has-logo">
+<img src="game%20logos/terraria.png" alt="Terraria logo">
+<p>Terraria</p>
+</a>
+
+<a href="games/survivor-io.html" class="game has-logo">
+<img src="game%20logos/survivor-io.png" alt="Survivor.io logo">
+<p>Survivor.io</p>
+</a>
+
+<a href="games/smashy-road.html" class="game has-logo">
+<img src="game%20logos/smashy-road.png" alt="Smashy Road logo">
+<p>Smashy Road</p>
+</a>
+
+<a href="games/papas-hotdoggeria.html" class="game has-logo">
+<img src="game%20logos/papas-hotdoggeria.png" alt="Papa's Hotdoggeria logo">
+<p>Papa's Hotdoggeria</p>
+</a>
+
+<a href="games/papas-freezeria.html" class="game has-logo">
+<img src="game%20logos/papas-freezeria.png" alt="Papa's Freezeria logo">
+<p>Papa's Freezeria</p>
+</a>
+
+<a href="games/papas-pastaria.html" class="game has-logo">
+<img src="game%20logos/papas-pastaria.png" alt="Papa's Pastaria logo">
+<p>Papa's Pastaria</p>
+</a>
+
+<a href="games/papas-donuteria.html" class="game has-logo">
+<img src="game%20logos/papas-donuteria.png" alt="Papa's Donuteria logo">
+<p>Papa's Donuteria</p>
+</a>
+
+<a href="games/geometry-dash-world.html" class="game has-logo">
+<img src="game%20logos/geometry-dash-world.png" alt="Geometry Dash World logo">
+<p>Geometry Dash World</p>
+</a>
+
+<a href="games/geometry-dash-meltdown.html" class="game has-logo">
+<img src="game%20logos/geometry-dash-meltdown.png" alt="Geometry Dash Meltdown logo">
+<p>Geometry Dash Meltdown</p>
+</a>
+
+<a href="games/red-ball-4.html" class="game has-logo">
+<img src="game%20logos/red-ball-4.png" alt="Red Ball 4 logo">
+<p>Red Ball 4</p>
+</a>
+
+<a href="games/a-small-world-cup.html" class="game has-logo">
+<img src="game%20logos/a-small-world-cup.png" alt="A Small World Cup logo">
+<p>A Small World Cup</p>
+</a>
+
+<a href="games/moto-x3m-spookyland.html" class="game has-logo">
+<img src="game%20logos/moto-x3m-spookyland.png" alt="Moto X3M SpookyLand logo">
+<p>Moto X3M SpookyLand</p>
+</a>
+
+<a href="games/moto-x3m-winter.html" class="game has-logo">
+<img src="game%20logos/moto-x3m-winter.png" alt="Moto X3M Winter logo">
+<p>Moto X3M Winter</p>
+</a>
+
+<a href="games/moto-x3m-pool-party.html" class="game has-logo">
+<img src="game%20logos/moto-x3m-pool-party.png" alt="Moto X3M Pool Party logo">
+<p>Moto X3M Pool Party</p>
+</a>
+
+<a href="games/retro-bowl-college.html" class="game has-logo">
+<img src="game%20logos/retro-bowl-college.png" alt="Retro Bowl College logo">
+<p>Retro Bowl College</p>
+</a>
+
+<a href="games/idle-breakout.html" class="game has-logo">
+<img src="game%20logos/idle-breakout.png" alt="Idle Breakout logo">
+<p>Idle Breakout</p>
+</a>
+
+<a href="games/run-1.html" class="game has-logo">
+<img src="game%20logos/run-1.png" alt="Run 1 logo">
+<p>Run 1</p>
+</a>
+
+<a href="games/run-2.html" class="game has-logo">
+<img src="game%20logos/run-2.png" alt="Run 2 logo">
+<p>Run 2</p>
+</a>
+
+<a href="games/fall-guys.html" class="game has-logo">
+<img src="game%20logos/fall-guys.png" alt="Fall Guys logo">
+<p>Fall Guys</p>
+</a>
+
+<a href="games/helix-jump.html" class="game has-logo">
+<img src="game%20logos/helix-jump.png" alt="Helix Jump logo">
+<p>Helix Jump</p>
+</a>
+
+<a href="games/polytrack.html" class="game has-logo">
+<img src="game%20logos/polytrack.png" alt="PolyTrack logo">
+<p>PolyTrack</p>
+</a>
+
+<a href="games/ahoy-survival.html" class="game has-logo">
+<img src="game%20logos/ahoy-survival.png" alt="Ahoy Survival logo">
+<p>Ahoy Survival</p>
+</a>
+
+<a href="games/duck-life-1.html" class="game has-logo">
+<img src="game%20logos/duck-life-1.png" alt="Duck Life 1 logo">
+<p>Duck Life 1</p>
+</a>
+
+<a href="games/tomb-of-the-mask.html" class="game has-logo">
+<img src="game%20logos/tomb-of-the-mask.png" alt="Tomb Of The Mask logo">
+<p>Tomb Of The Mask</p>
+</a>
+
+<a href="games/hole-io.html" class="game has-logo">
+<img src="game%20logos/hole-io.png" alt="Hole.io logo">
+<p>Hole.io</p>
+</a>
+
+<a href="games/backrooms.html" class="game has-logo">
+<img src="game%20logos/backrooms.png" alt="Backrooms logo">
+<p>Backrooms</p>
+</a>
+
+<a href="games/worlds-hardest-game.html" class="game has-logo">
+<img src="game%20logos/worlds-hardest-game.png" alt="World's Hardest Game logo">
+<p>World's Hardest Game</p>
+</a>
+
+<a href="games/dumb-ways-to-die.html" class="game has-logo">
+<img src="game%20logos/dumb-ways-to-die.png" alt="Dumb Ways To Die logo">
+<p>Dumb Ways To Die</p>
+</a>
+
+<a href="games/space-waves.html" class="game has-logo">
+<img src="game%20logos/space-waves.png" alt="Space Waves logo">
+<p>Space Waves</p>
+</a>
+
+<a href="games/money-rush.html" class="game has-logo">
+<img src="game%20logos/money-rush.png" alt="Money Rush logo">
+<p>Money Rush</p>
+</a>
+
+<a href="games/slice-master.html" class="game has-logo">
+<img src="game%20logos/slice-master.png" alt="Slice Master logo">
+<p>Slice Master</p>
+</a>
+
+<a href="games/basketball-bros.html" class="game has-logo">
+<img src="game%20logos/basketball-bros.png" alt="Basketball Bros logo">
+<p>Basketball Bros</p>
+</a>
+
+<a href="games/ragdoll-drop.html" class="game has-logo">
+<img src="game%20logos/ragdoll-drop.png" alt="Ragdoll Drop logo">
+<p>Ragdoll Drop</p>
+</a>
+
+<a href="games/fisquarium.html" class="game has-logo">
+<img src="game%20logos/fisquarium.png" alt="Fisquarium logo">
+<p>Fisquarium</p>
+</a>
+
+<a href="games/stickman-hook.html" class="game has-logo">
+<img src="game%20logos/stickman-hook.png" alt="Stickman Hook logo">
+<p>Stickman Hook</p>
+</a>
+
+<a href="games/shell-shockers.html" class="game has-logo">
+<img src="game%20logos/shell-shockers.png" alt="Shell Shockers logo">
+<p>Shell Shockers</p>
+</a>
+
+<a href="games/paper-io-2.html" class="game has-logo">
+<img src="game%20logos/paper-io-2.png" alt="Paper.io 2 logo">
+<p>Paper.io 2</p>
+</a>
+
+<a href="games/duck-life-2.html" class="game has-logo">
+<img src="game%20logos/duck-life-2.png" alt="Duck Life 2 logo">
+<p>Duck Life 2</p>
+</a>
+
+<a href="games/ice-dodo.html" class="game has-logo">
+<img src="game%20logos/ice-dodo.png" alt="Ice Dodo logo">
+<p>Ice Dodo</p>
+</a>
+
+<a href="games/slow-roads.html" class="game has-logo">
+<img src="game%20logos/slow-roads.png" alt="Slow Roads logo">
+<p>Slow Roads</p>
+</a>
+
+<a href="games/head-soccer.html" class="game has-logo">
+<img src="game%20logos/head-soccer.png" alt="Head Soccer logo">
+<p>Head Soccer</p>
+</a>
+
+<a href="games/tunnel-rush.html" class="game has-logo">
+<img src="game%20logos/tunnel-rush.png" alt="Tunnel Rush logo">
+<p>Tunnel Rush</p>
+</a>
+
+<a href="games/basketball-legends.html" class="game has-logo">
+<img src="game%20logos/basketball-legends.png" alt="Basketball Legends logo">
+<p>Basketball Legends</p>
+</a>
+
+<a href="games/tabs.html" class="game has-logo">
+<img src="game%20logos/tabs.png" alt="TABS logo">
+<p>TABS</p>
+</a>
+
+<a href="games/elastic-face.html" class="game has-logo">
+<img src="game%20logos/elastic-face.png" alt="Elastic Face logo">
+<p>Elastic Face</p>
+</a>
+
+<a href="games/aviamasters.html" class="game has-logo">
+<img src="game%20logos/aviamasters.png" alt="Aviamasters logo">
+<p>Aviamasters</p>
+</a>
+
+<a href="games/learn-2-fly.html" class="game has-logo">
+<img src="game%20logos/learn-2-fly.png" alt="Learn 2 Fly logo">
+<p>Learn 2 Fly</p>
+</a>
+
+<a href="games/geometry-dash-lite.html" class="game has-logo">
+<img src="game%20logos/geometry-dash-lite.png" alt="Geometry Dash Lite logo">
+<p>Geometry Dash Lite</p>
+</a>
+
+<a href="games/jetpack-joyride.html" class="game has-logo">
+<img src="game%20logos/jetpack-joyride.png" alt="Jetpack Joyride logo">
+<p>Jetpack Joyride</p>
+</a>
+
+<a href="games/boxel-rebound.html" class="game has-logo">
+<img src="game%20logos/boxel-rebound.png" alt="Boxel Rebound logo">
+<p>Boxel Rebound</p>
+</a>
+
+<a href="games/grindcraft.html" class="game has-logo">
+<img src="game%20logos/grindcraft.png" alt="Grindcraft logo">
+<p>Grindcraft</p>
+</a>
+
+<a href="games/stack-ball.html" class="game has-logo">
+<img src="game%20logos/stack-ball.png" alt="Stack Ball logo">
+<p>Stack Ball</p>
+</a>
+
+<a href="games/brawl-stars.html" class="game has-logo">
+<img src="game%20logos/brawl-stars.png" alt="Brawl Stars logo">
+<p>Brawl Stars</p>
+</a>
+
+<a href="games/minecraft-case-simulator.html" class="game has-logo">
+<img src="game%20logos/minecraft-case-simulator.png" alt="Minecraft Case Simulator logo">
+<p>Minecraft Case Simulator</p>
+</a>
+
+<a href="games/papas-scooperia.html" class="game has-logo">
+<img src="game%20logos/papas-scooperia.png" alt="Papa's Scooperia logo">
+<p>Papas Scooperia</p>
+</a>
+
+<a href="games/osu.html" class="game has-logo">
+<img src="game%20logos/osu.png" alt="OSU! logo">
+<p>OSU!</p>
+</a>
+
+<a href="games/krunker-io.html" class="game has-logo">
+<img src="game%20logos/krunker-io.png" alt="Krunker.io logo">
+<p>Krunker.io</p>
+</a>
+
+<a href="games/dreadhead-parkour.html" class="game has-logo">
+<img src="game%20logos/dreadhead-parkour.png" alt="Dreadhead Parkour logo">
+<p>Dreadhead Parkour</p>
+</a>
+
+<a href="games/eggy-car.html" class="game has-logo">
+<img src="game%20logos/eggy-car.png" alt="Eggy Car logo">
+<p>Eggy Car</p>
+</a>
+
+<a href="games/raft-life.html" class="game has-logo">
+<img src="game%20logos/raft-life.png" alt="Raft Life logo">
+<p>Raft Life</p>
+</a>
+
+<a href="games/paper-minecraft.html" class="game has-logo">
+<img src="game%20logos/paper-minecraft.png" alt="Paper Minecraft logo">
+<p>Paper Minecraft</p>
+</a>
+
+<a href="games/gas-station-simulator.html" class="game has-logo">
+<img src="game%20logos/gas-station-simulator.png" alt="Gas Station Simulator logo">
+<p>Gas Station Simulator</p>
+</a>
+
+</div>
+
+<div class="no-results" id="noResults">
+    <p class="no-results-text">Sorry, we dont have that game yet.</p>
+    <p class="recent-empty-copy"></p>
+    <a class="request-game-btn" href="https://forms.gle/CmgoCdT6N45yGPHN9" target="_blank" rel="noopener noreferrer">Request A Game</a>
+    <div class="no-results-grid" id="noResultsGrid"></div>
+</div>
+
+<script>
+const GAME_CATEGORIES = window.GAME_CATEGORIES || {};
+const RECENTS_KEY = "recentGames";
+const RECENTS_LIMIT = 24;
+const FAVORITES_KEY = "favoriteGames";
+const TAB_DISGUISE_KEY = "backdoorlabs_tab_disguise";
+const PAGE_MODES = {
+    home: "home",
+    recentlyPlayed: "recently-played",
+    favourites: "favourites"
+};
+const body = document.body;
+const gamesContainer = document.querySelector(".games");
+const allGamesSection = document.querySelector(".all-games");
+const allGamesActions = document.querySelector(".all-games-actions");
+const noResults = document.getElementById("noResults");
+const noResultsText = noResults ? noResults.querySelector(".no-results-text") : null;
+const noResultsRequestButton = noResults ? noResults.querySelector(".request-game-btn") : null;
+const noResultsGrid = document.getElementById("noResultsGrid");
+const pageTitle = document.getElementById("pageTitle");
+const searchBar = document.getElementById("searchBar");
+const sortSelect = document.getElementById("sortSelect");
+const disguiseTabBtn = document.getElementById("disguiseTabBtn");
+const topbarDisguiseBtn = document.getElementById("topbarDisguiseBtn");
+const clearRecentsBtn = document.getElementById("clearRecentsBtn");
+const navHome = document.getElementById("navHome");
+const navRecentlyPlayed = document.getElementById("navRecentlyPlayed");
+const navFavourites = document.getElementById("navFavourites");
+const navStats = document.getElementById("navStats");
+const params = new URLSearchParams(window.location.search);
+const currentFile = window.location.pathname.split("/").pop() || "index.html";
+const currentPageMode = currentFile === "recently-played.html"
+    ? PAGE_MODES.recentlyPlayed
+    : currentFile === "favourites.html"
+        ? PAGE_MODES.favourites
+        : PAGE_MODES.home;
+const pageConfig = {
+    [PAGE_MODES.home]: {
+        heading: "All Games",
+        placeholder: "Search All Games...",
+        emptyTitle: "Sorry, we dont have that game yet.",
+        emptyBody: "",
+        titleBase: "Backdoor Labs"
+    },
+    [PAGE_MODES.recentlyPlayed]: {
+        heading: "Recently Played",
+        placeholder: "Search Recently Played...",
+        emptyTitle: "No recently played games yet.",
+        emptyBody: "Play something from Home and it will show up here.",
+        titleBase: "Recently Played | Backdoor Labs"
+    },
+    [PAGE_MODES.favourites]: {
+        heading: "Favourited Games",
+        placeholder: "Search Favourite Games...",
+        emptyTitle: "No favourited games yet.",
+        emptyBody: "Click the star on any game to add it here.",
+        titleBase: "Favourited Games | Backdoor Labs"
+    }
+};
+function getGameCategories(href) {
+    const value = GAME_CATEGORIES[href];
+    if (Array.isArray(value)) {
+        return value;
+    }
+    if (typeof value === "string" && value) {
+        return [value];
+    }
+    return ["Arcade"];
+}
+const libraryGames = Array.from(document.querySelectorAll(".games .game")).map((game, index) => {
+    const img = game.querySelector("img");
+    const titleEl = game.querySelector("p");
+    return {
+        href: game.getAttribute("href"),
+        title: titleEl ? titleEl.textContent.trim() : "",
+        imgSrc: img ? img.getAttribute("src") : "",
+        alt: img ? img.getAttribute("alt") : "",
+        categories: getGameCategories(game.getAttribute("href")),
+        order: index
+    };
+});
+const gameLibrary = new Map(libraryGames.map((game) => [game.href, game]));
+const categoryOptions = [...new Set(libraryGames.flatMap((game) => game.categories))].sort((a, b) => a.localeCompare(b));
+
+function getCurrentPageConfig() {
+    return pageConfig[currentPageMode] || pageConfig[PAGE_MODES.home];
+}
+
+function isTabDisguised() {
+    return localStorage.getItem(TAB_DISGUISE_KEY) === "google";
+}
+
+function applyTabDisguise() {
+    document.title = isTabDisguised() ? "Google" : getCurrentPageConfig().titleBase;
+    const favicon = document.querySelector('link[rel="icon"]');
+    if (favicon) {
+        favicon.href = isTabDisguised() ? "game%20logos/google.png" : "game%20logos/logo.png";
+    }
+}
+
+function updateDisguiseTabButton() {
+    const nextLabel = isTabDisguised() ? "Undisguise Tab" : "Disguise Tab";
+    if (disguiseTabBtn) {
+        disguiseTabBtn.textContent = nextLabel;
+    }
+    if (topbarDisguiseBtn) {
+        topbarDisguiseBtn.textContent = nextLabel;
+    }
+}
+
+function getSearchScore(title, query) {
+    const normalizedTitle = title.toLowerCase();
+    const normalizedQuery = query.toLowerCase().trim();
+
+    if (!normalizedQuery) {
+        return 1000;
+    }
+
+    const startsAt = normalizedTitle.indexOf(normalizedQuery);
+    if (startsAt === 0) {
+        return 0;
+    }
+    if (startsAt > 0) {
+        return startsAt;
+    }
+
+    const words = normalizedTitle.split(/[^a-z0-9]+/).filter(Boolean);
+    const wordMatchIndex = words.findIndex((word) => word.startsWith(normalizedQuery));
+    if (wordMatchIndex !== -1) {
+        return 50 + wordMatchIndex;
+    }
+
+    return 1000;
+}
+
+function getSuggestionScore(title, query) {
+    const normalizedTitle = title.toLowerCase();
+    const normalizedQuery = query.toLowerCase().trim();
+
+    if (!normalizedQuery) {
+        return 1000;
+    }
+
+    let score = 0;
+    let lastIndex = -1;
+
+    for (const char of normalizedQuery) {
+        const nextIndex = normalizedTitle.indexOf(char, lastIndex + 1);
+        if (nextIndex === -1) {
+            score += 40;
+            continue;
+        }
+
+        score += nextIndex - lastIndex - 1;
+        lastIndex = nextIndex;
+    }
+
+    if (normalizedTitle.startsWith(normalizedQuery[0])) {
+        score -= 10;
+    }
+
+    return score + Math.abs(normalizedTitle.length - normalizedQuery.length);
+}
+
+function getRecents() {
+    try {
+        return JSON.parse(localStorage.getItem(RECENTS_KEY) || "[]");
+    } catch (e) {
+        return [];
+    }
+}
+
+function getFavorites() {
+    try {
+        return JSON.parse(localStorage.getItem(FAVORITES_KEY) || "[]");
+    } catch (e) {
+        return [];
+    }
+}
+
+function isFavoriteHref(href) {
+    return getFavorites().includes(href);
+}
+
+function toggleFavoriteHref(href) {
+    if (!href) return false;
+    const favorites = getFavorites();
+    const next = favorites.includes(href)
+        ? favorites.filter((item) => item !== href)
+        : [href, ...favorites.filter((item) => item !== href)];
+    localStorage.setItem(FAVORITES_KEY, JSON.stringify(next));
+    return next.includes(href);
+}
+
+function updateRecentsByHref(href) {
+    if (!href) return;
+    const current = getRecents();
+    const next = [href, ...current.filter((item) => item !== href)].slice(0, RECENTS_LIMIT);
+    localStorage.setItem(RECENTS_KEY, JSON.stringify(next));
+}
+
+function updateRecents(gameEl) {
+    updateRecentsByHref(gameEl.getAttribute("href"));
+}
+
+function attachGameClickHandlers(games) {
+    games.forEach((game) => {
+        game.addEventListener("click", () => {
+            updateRecents(game);
+        });
+    });
+}
+
+function updateFavoriteButtonState(button, isFavorite) {
+    button.classList.toggle("is-favorite", isFavorite);
+    button.setAttribute("aria-pressed", isFavorite ? "true" : "false");
+    if (isFavorite) {
+        button.classList.remove("favorite-pop");
+        void button.offsetWidth;
+        button.classList.add("favorite-pop");
+    } else {
+        button.classList.remove("favorite-pop");
+    }
+}
+
+function syncFavoriteButtons(href, isFavorite) {
+    document.querySelectorAll(`.favorite-toggle[data-href="${CSS.escape(href)}"]`).forEach((button) => {
+        updateFavoriteButtonState(button, isFavorite);
+    });
+}
+
+function createFavoriteButton(href) {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "favorite-toggle";
+    button.setAttribute("aria-label", "Toggle favourite");
+    button.innerHTML = `
+        <svg viewBox="0 0 24 24" focusable="false" aria-hidden="true">
+            <path d="m12 17.27-6.18 3.73 1.64-7.03L2 9.24l7.19-.61L12 2l2.81 6.63 7.19.61-5.46 4.73L18.18 21z"></path>
+        </svg>
+    `;
+    button.dataset.href = href;
+    updateFavoriteButtonState(button, isFavoriteHref(href));
+    button.addEventListener("click", (event) => {
+        event.preventDefault();
+        event.stopPropagation();
+        const isFavorite = toggleFavoriteHref(href);
+        syncFavoriteButtons(href, isFavorite);
+        if (currentPageMode === PAGE_MODES.favourites) {
+            renderCurrentPage();
+        }
+    });
+    return button;
+}
+
+function decorateFavoriteButtons(cards) {
+    cards.forEach((card) => {
+        if (card.querySelector(".favorite-toggle")) return;
+        const href = card.getAttribute("href");
+        if (!href) return;
+        card.appendChild(createFavoriteButton(href));
+    });
+}
+
+function renderGameCards(games) {
+    if (!gamesContainer) return [];
+    gamesContainer.innerHTML = games.map((game) => `
+        <a href="${game.href}" class="game has-logo" data-order="${game.order}" data-category="${game.categories.join(", ")}">
+            <img src="${game.imgSrc}" alt="${game.alt}">
+            <p>${game.title}</p>
+        </a>
+    `).join("");
+    const cards = Array.from(gamesContainer.querySelectorAll(".game"));
+    attachGameClickHandlers(cards);
+    decorateFavoriteButtons(cards);
+    return cards;
+}
+
+function updatePageTitleCount(count) {
+    if (!pageTitle) return;
+    pageTitle.textContent = `${getCurrentPageConfig().heading} (${count})`;
+}
+
+function updateSidebarState() {
+    [navHome, navRecentlyPlayed, navFavourites, navStats].forEach((button) => {
+        if (button) {
+            button.classList.remove("active");
+        }
+    });
+
+    const activeButton = currentPageMode === PAGE_MODES.recentlyPlayed
+        ? navRecentlyPlayed
+        : currentPageMode === PAGE_MODES.favourites
+            ? navFavourites
+            : navHome;
+
+    if (activeButton) {
+        activeButton.classList.add("active");
+    }
+}
+
+function updatePageChrome() {
+    const config = getCurrentPageConfig();
+    body.classList.toggle("recent-page", currentPageMode !== PAGE_MODES.home);
+    body.classList.toggle("favourites-page", currentPageMode === PAGE_MODES.favourites);
+    if (searchBar) {
+        searchBar.placeholder = config.placeholder;
+    }
+    if (allGamesActions) {
+        allGamesActions.style.display =
+            currentPageMode === PAGE_MODES.home || currentPageMode === PAGE_MODES.recentlyPlayed
+                ? "flex"
+                : "none";
+    }
+    if (disguiseTabBtn) {
+        disguiseTabBtn.style.display = currentPageMode === PAGE_MODES.home ? "inline-flex" : "none";
+    }
+    if (sortSelect) {
+        const sortWrap = sortSelect.closest(".games-sort-wrap");
+        if (sortWrap) {
+            sortWrap.style.display = currentPageMode === PAGE_MODES.home ? "flex" : "none";
+        }
+    }
+    if (clearRecentsBtn) {
+        clearRecentsBtn.style.display = currentPageMode === PAGE_MODES.recentlyPlayed ? "inline-flex" : "none";
+    }
+    updateSidebarState();
+    applyTabDisguise();
+    updateDisguiseTabButton();
+}
+
+function updateEmptyState(title, bodyText, showRequestButton, showSuggestions) {
+    if (noResultsText) {
+        noResultsText.textContent = title;
+    }
+    const emptyCopy = noResults ? noResults.querySelector(".recent-empty-copy") : null;
+    if (emptyCopy) {
+        emptyCopy.textContent = bodyText;
+        emptyCopy.style.display = bodyText ? "block" : "none";
+    }
+    if (noResultsRequestButton) {
+        noResultsRequestButton.style.display = showRequestButton ? "inline-block" : "none";
+    }
+    if (noResultsGrid) {
+        noResultsGrid.style.display = showSuggestions ? "flex" : "none";
+    }
+}
+
+function renderNoResultsSuggestions(query) {
+    if (!noResultsGrid) return;
+    const picks = [...libraryGames]
+        .sort((a, b) => {
+            const aScore = getSuggestionScore(a.title, query);
+            const bScore = getSuggestionScore(b.title, query);
+            if (aScore !== bScore) {
+                return aScore - bScore;
+            }
+            return a.title.localeCompare(b.title);
+        })
+        .slice(0, 32);
+
+    noResultsGrid.innerHTML = picks.map((game) => `
+        <a href="${game.href}" class="game has-logo" data-order="${game.order}" data-category="${game.categories.join(", ")}">
+            <img src="${game.imgSrc}" alt="${game.alt}">
+            <p>${game.title}</p>
+        </a>
+    `).join("");
+
+    const suggestionCards = Array.from(noResultsGrid.querySelectorAll(".game"));
+    attachGameClickHandlers(suggestionCards);
+    decorateFavoriteButtons(suggestionCards);
+}
+
+function populateCategoryOptions() {
+    if (!sortSelect) return;
+    sortSelect.innerHTML = `
+        <option value="">All Categories</option>
+        ${categoryOptions.map((category) => `<option value="${category}">${category}</option>`).join("")}
+    `;
+}
+
+function getFilteredLibraryGames(selectedCategory) {
+    const games = !selectedCategory
+        ? [...libraryGames]
+        : libraryGames.filter((game) => game.categories.includes(selectedCategory));
+    return games.sort((a, b) => b.order - a.order);
+}
+
+function getGlobalSearchGames(query, selectedCategory = "") {
+    return getFilteredLibraryGames(selectedCategory)
+        .sort((a, b) => {
+            const aScore = getSearchScore(a.title, query);
+            const bScore = getSearchScore(b.title, query);
+            if (aScore !== bScore) {
+                return aScore - bScore;
+            }
+            return a.title.localeCompare(b.title);
+        })
+        .filter((game) => game.title.toLowerCase().includes(query));
+}
+
+function getModeGames(mode) {
+    if (mode === PAGE_MODES.recentlyPlayed) {
+        return getRecents().map((href) => gameLibrary.get(href)).filter(Boolean);
+    }
+    if (mode === PAGE_MODES.favourites) {
+        return getFavorites().map((href) => gameLibrary.get(href)).filter(Boolean);
+    }
+    return [...libraryGames];
+}
+
+function renderHomePage(query) {
+    const selectedCategory = (sortSelect && sortSelect.value) || "";
+    const baseGames = getFilteredLibraryGames(selectedCategory);
+    let displayGames = query
+        ? getGlobalSearchGames(query, selectedCategory)
+        : [...baseGames];
+
+    document.body.classList.toggle("is-searching", !!query);
+    updatePageTitleCount(query ? displayGames.length : baseGames.length);
+
+    if (query && !displayGames.length) {
+        if (allGamesSection) {
+            allGamesSection.style.display = "none";
+        }
+        gamesContainer.style.display = "none";
+        noResults.style.display = "block";
+        updateEmptyState("Sorry, we dont have that game yet.", "", true, true);
+        renderNoResultsSuggestions(query);
+        return;
+    }
+
+    if (allGamesSection) {
+        allGamesSection.style.display = "";
+    }
+    noResults.style.display = "none";
+    gamesContainer.style.display = "";
+    renderGameCards(displayGames);
+}
+
+function renderCollectionPage(mode, query) {
+    const baseGames = getModeGames(mode);
+    document.body.classList.toggle("is-searching", !!query);
+
+    if (!baseGames.length && !query) {
+        updatePageTitleCount(0);
+        gamesContainer.style.display = "none";
+        noResults.style.display = "block";
+        updateEmptyState(
+            getCurrentPageConfig().emptyTitle,
+            getCurrentPageConfig().emptyBody,
+            false,
+            false
+        );
+        return;
+    }
+
+    let displayGames = [...baseGames];
+    if (query) {
+        displayGames = displayGames
+            .filter((game) => game.title.toLowerCase().includes(query))
+            .sort((a, b) => {
+                const aScore = getSearchScore(a.title, query);
+                const bScore = getSearchScore(b.title, query);
+                if (aScore !== bScore) {
+                    return aScore - bScore;
+                }
+                return a.title.localeCompare(b.title);
+            });
+    }
+
+    updatePageTitleCount(query ? displayGames.length : baseGames.length);
+
+    if (!displayGames.length) {
+        gamesContainer.style.display = "none";
+        noResults.style.display = "block";
+        updateEmptyState(
+            "There are no results for that game in recently played.",
+            "",
+            false,
+            false
+        );
+        return;
+    }
+
+    noResults.style.display = "none";
+    gamesContainer.style.display = "grid";
+    renderGameCards(displayGames);
+}
+
+function renderCurrentPage() {
+    const query = searchBar ? searchBar.value.trim().toLowerCase() : "";
+    updatePageChrome();
+    if (currentPageMode === PAGE_MODES.home) {
+        renderHomePage(query);
+        return;
+    }
+    renderCollectionPage(currentPageMode, query);
+}
+
+function searchGames() {
+    renderCurrentPage();
+}
+
+function sortGames(mode) {
+    if (currentPageMode !== PAGE_MODES.home || !sortSelect) return;
+    if (mode) {
+        sortSelect.value = mode;
+    }
+    renderCurrentPage();
+}
+
+function playRandomGame() {
+    const visibleGames = Array.from(gamesContainer.querySelectorAll(".game")).filter(
+        (game) => game.style.display !== "none"
+    );
+    if (!visibleGames.length) return;
+    const randomGame = visibleGames[Math.floor(Math.random() * visibleGames.length)];
+    updateRecents(randomGame);
+    window.location.href = randomGame.href;
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+    const searchQuery = params.get("search") || "";
+
+    populateCategoryOptions();
+    if (searchBar && searchQuery) {
+        searchBar.value = searchQuery;
+    }
+    const handleDisguiseToggle = () => {
+        if (isTabDisguised()) {
+            localStorage.removeItem(TAB_DISGUISE_KEY);
+        } else {
+            localStorage.setItem(TAB_DISGUISE_KEY, "google");
+        }
+        applyTabDisguise();
+        updateDisguiseTabButton();
+    };
+    if (disguiseTabBtn) {
+        disguiseTabBtn.addEventListener("click", handleDisguiseToggle);
+    }
+    if (topbarDisguiseBtn) {
+        topbarDisguiseBtn.addEventListener("click", handleDisguiseToggle);
+    }
+    if (clearRecentsBtn) {
+        clearRecentsBtn.addEventListener("click", () => {
+            localStorage.removeItem(RECENTS_KEY);
+            renderCurrentPage();
+        });
+    }
+
+    renderCurrentPage();
+});
+</script>
+
+</div>
+
+</body>
+</html>

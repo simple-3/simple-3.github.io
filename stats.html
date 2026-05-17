@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Stats | Backdoor Labs</title>
+<link rel="icon" type="image/png" href="game%20logos/logo.png">
+<script>
+(() => {
+    const disguised = localStorage.getItem("backdoorlabs_tab_disguise") === "google";
+    const favicon = document.querySelector('link[rel="icon"]');
+    document.title = disguised ? "Google" : "Stats | Backdoor Labs";
+    if (favicon) {
+        favicon.href = disguised ? "game%20logos/google.png" : "game%20logos/logo.png";
+    }
+})();
+</script>
+<link rel="stylesheet" href="style.css">
+<script src="game-categories.js"></script>
+</head>
+
+<body class="home-page stats-page">
+
+<aside class="sidebar" aria-label="Game categories">
+    <nav class="sidebar-nav">
+        <button class="sidebar-link" id="navHome" type="button" onclick="window.location.href='index.html'">
+            <span class="sidebar-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" focusable="false">
+                    <path d="M12 4 3 11h2v9h5v-6h4v6h5v-9h2z"></path>
+                </svg>
+            </span>
+            <span class="sidebar-label">Home</span>
+        </button>
+        <button class="sidebar-link" id="navRecentlyPlayed" type="button" onclick="window.location.href='recently-played.html'">
+            <span class="sidebar-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" focusable="false">
+                    <path d="M12 7a1 1 0 0 1 1 1v3.59l2.7 2.7a1 1 0 1 1-1.4 1.41l-3-3A1 1 0 0 1 11 12V8a1 1 0 0 1 1-1zm0-5a10 10 0 1 1 0 20 10 10 0 0 1 0-20z"></path>
+                </svg>
+            </span>
+            <span class="sidebar-label">Recently Played</span>
+        </button>
+        <button class="sidebar-link" id="navFavourites" type="button" onclick="window.location.href='favourites.html'">
+            <span class="sidebar-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" focusable="false">
+                    <path d="m12 18.2-5.29 3.12 1.4-5.98-4.64-4.02 6.12-.52L12 5.2l2.41 5.6 6.12.52-4.64 4.02 1.4 5.98z"></path>
+                </svg>
+            </span>
+            <span class="sidebar-label">Favourites</span>
+        </button>
+        <button class="sidebar-link" id="navSoundEffects" type="button" onclick="window.location.href='sound-effects.html'">
+            <span class="sidebar-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" focusable="false">
+                    <path d="M5 9v6h4l5 4V5l-5 4zm11.5 3a4.5 4.5 0 0 0-2.5-4.03v8.06A4.5 4.5 0 0 0 16.5 12zm0-8.5v2.06a7 7 0 0 1 0 12.88v2.06a9 9 0 0 0 0-17z"></path>
+                </svg>
+            </span>
+            <span class="sidebar-label">Sound Effects</span>
+        </button>
+        <button class="sidebar-link active" id="navStats" type="button" onclick="window.location.href='stats.html'">
+            <span class="sidebar-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" focusable="false">
+                    <path d="M5 19h14v2H5zm1-3h3V8H6zm5 0h3V4h-3zm5 0h3v-6h-3z"></path>
+                </svg>
+            </span>
+            <span class="sidebar-label">Stats</span>
+        </button>
+        <button class="sidebar-link" id="navSettings" type="button" onclick="window.location.href='settings.html'">
+            <span class="sidebar-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" focusable="false">
+                    <path d="M19.14 12.94a7.43 7.43 0 0 0 .05-.94 7.43 7.43 0 0 0-.05-.94l2.03-1.58a.5.5 0 0 0 .12-.64l-1.92-3.32a.5.5 0 0 0-.6-.22l-2.39.96a7.28 7.28 0 0 0-1.63-.94l-.36-2.54a.5.5 0 0 0-.5-.42h-3.84a.5.5 0 0 0-.5.42l-.36 2.54a7.28 7.28 0 0 0-1.63.94l-2.39-.96a.5.5 0 0 0-.6.22L2.71 8.84a.5.5 0 0 0 .12.64l2.03 1.58a7.43 7.43 0 0 0-.05.94 7.43 7.43 0 0 0 .05.94l-2.03 1.58a.5.5 0 0 0-.12.64l1.92 3.32a.5.5 0 0 0 .6.22l2.39-.96c.5.39 1.05.71 1.63.94l.36 2.54a.5.5 0 0 0 .5.42h3.84a.5.5 0 0 0 .5-.42l.36-2.54c.58-.23 1.13-.55 1.63-.94l2.39.96a.5.5 0 0 0 .6-.22l1.92-3.32a.5.5 0 0 0-.12-.64zM12 15.5A3.5 3.5 0 1 1 12 8.5a3.5 3.5 0 0 1 0 7z"></path>
+                </svg>
+            </span>
+            <span class="sidebar-label">Settings</span>
+        </button>
+    </nav>
+
+</aside>
+
+<div class="page-shell">
+    <div class="topbar">
+        <button class="topbar-logo-btn" type="button" onclick="window.location.href='index.html'">
+            <img class="topbar-logo" src="game%20logos/logo.png" alt="Backdoor Labs logo">
+        </button>
+        <button class="title home-title" type="button" onclick="window.location.href='index.html'">Backdoor Labs</button>
+        <input
+            type="text"
+            id="searchBar"
+            placeholder="Search All Games..."
+        >
+        <a id="requestGameBtn" href="https://forms.gle/CmgoCdT6N45yGPHN9" target="_blank" rel="noopener noreferrer">Request A Game</a>
+        <button id="topbarDisguiseBtn" type="button">Disguise Tab</button>
+    </div>
+
+    <main class="stats-main">
+        <section class="stats-panel" aria-labelledby="statsHeading">
+            <div class="stats-list">
+                <div class="stats-row">
+                    <div>
+                        <div class="stats-row-label" id="statsHeading">Games Played</div>
+                    </div>
+                    <div class="stats-row-value" id="gamesPlayedValue">0</div>
+                </div>
+                <div class="stats-row">
+                    <div>
+                        <div class="stats-row-label">Time Played</div>
+                    </div>
+                    <div class="stats-row-value" id="timePlayedValue">0 Hours, 0 Minutes</div>
+                </div>
+                <div class="stats-row">
+                    <div>
+                        <div class="stats-row-label">Longest Session</div>
+                    </div>
+                    <div class="stats-row-value" id="longestSessionValue">None</div>
+                </div>
+                <div class="stats-row">
+                    <div>
+                        <div class="stats-row-label">Least Played Game</div>
+                    </div>
+                    <div class="stats-row-value" id="leastPlayedValue">None</div>
+                </div>
+                <div class="stats-row">
+                    <div>
+                        <div class="stats-row-label">Most Played Game</div>
+                    </div>
+                    <div class="stats-row-value" id="mostPlayedValue">None</div>
+                </div>
+                <div class="stats-row">
+                    <div>
+                        <div class="stats-row-label">Least Played Category</div>
+                    </div>
+                    <div class="stats-row-value" id="leastCategoryValue">None</div>
+                </div>
+                <div class="stats-row">
+                    <div>
+                        <div class="stats-row-label">Most Played Category</div>
+                    </div>
+                    <div class="stats-row-value" id="favoriteCategoryValue">None</div>
+                </div>
+            </div>
+        </section>
+    </main>
+</div>
+
+<script>
+const GAME_CATEGORIES = window.GAME_CATEGORIES || {};
+const TAB_DISGUISE_KEY = "backdoorlabs_tab_disguise";
+const STATS_KEY = "backdoorlabs_stats";
+let searchTimer = null;
+const searchBar = document.getElementById("searchBar");
+const topbarDisguiseBtn = document.getElementById("topbarDisguiseBtn");
+const gamesPlayedValue = document.getElementById("gamesPlayedValue");
+const timePlayedValue = document.getElementById("timePlayedValue");
+const mostPlayedValue = document.getElementById("mostPlayedValue");
+const leastPlayedValue = document.getElementById("leastPlayedValue");
+const favoriteCategoryValue = document.getElementById("favoriteCategoryValue");
+const leastCategoryValue = document.getElementById("leastCategoryValue");
+const longestSessionValue = document.getElementById("longestSessionValue");
+
+function isTabDisguised() {
+    return localStorage.getItem(TAB_DISGUISE_KEY) === "google";
+}
+
+function applyTabDisguise() {
+    document.title = isTabDisguised() ? "Google" : "Stats | Backdoor Labs";
+    const favicon = document.querySelector('link[rel="icon"]');
+    if (favicon) {
+        favicon.href = isTabDisguised() ? "game%20logos/google.png" : "game%20logos/logo.png";
+    }
+}
+
+function updateDisguiseTabButton() {
+    if (!topbarDisguiseBtn) return;
+    topbarDisguiseBtn.textContent = isTabDisguised() ? "Undisguise Tab" : "Disguise Tab";
+}
+
+function getStats() {
+    try {
+        const parsed = JSON.parse(localStorage.getItem(STATS_KEY) || "{}");
+        return {
+            gamesPlayed: Number.isFinite(parsed.gamesPlayed) ? parsed.gamesPlayed : 0,
+            timePlayedMs: Number.isFinite(parsed.timePlayedMs) ? parsed.timePlayedMs : 0,
+            playTimes: parsed.playTimes && typeof parsed.playTimes === "object" ? parsed.playTimes : {},
+            longestSession: parsed.longestSession && typeof parsed.longestSession === "object"
+                ? parsed.longestSession
+                : null
+        };
+    } catch (error) {
+        return {
+            gamesPlayed: 0,
+            timePlayedMs: 0,
+            playTimes: {},
+            longestSession: null
+        };
+    }
+}
+
+function formatTimePlayed(milliseconds) {
+    const totalMinutes = Math.max(0, Math.floor(milliseconds / 60000));
+    const hours = Math.floor(totalMinutes / 60);
+    const minutes = totalMinutes % 60;
+    return `${hours} Hours, ${minutes} Minutes`;
+}
+
+function formatSessionMinutes(milliseconds) {
+    const totalMinutes = Math.max(1, Math.floor(milliseconds / 60000));
+    return `${totalMinutes} Minutes`;
+}
+
+function getMostPlayedGame(playTimes) {
+    return Object.values(playTimes)
+        .filter((entry) => entry && Number.isFinite(entry.timePlayedMs) && entry.timePlayedMs > 0)
+        .sort((a, b) => {
+            if (b.timePlayedMs !== a.timePlayedMs) return b.timePlayedMs - a.timePlayedMs;
+            return String(a.title || "").localeCompare(String(b.title || ""));
+        })[0] || null;
+}
+
+function getLeastPlayedGame(playTimes) {
+    return Object.values(playTimes)
+        .filter((entry) => entry && Number.isFinite(entry.timePlayedMs) && entry.timePlayedMs > 0)
+        .sort((a, b) => {
+            if (a.timePlayedMs !== b.timePlayedMs) return a.timePlayedMs - b.timePlayedMs;
+            return String(a.title || "").localeCompare(String(b.title || ""));
+        })[0] || null;
+}
+
+function getGameCategories(file) {
+    const value = GAME_CATEGORIES[`games/${file}`];
+    if (Array.isArray(value)) {
+        return value;
+    }
+    if (typeof value === "string" && value) {
+        return [value];
+    }
+    return ["Arcade"];
+}
+
+function getCategoryPlayTimes(playTimes) {
+    const categoryPlayTimes = {};
+
+    Object.entries(playTimes || {}).forEach(([file, entry]) => {
+        if (!entry || !Number.isFinite(entry.timePlayedMs) || entry.timePlayedMs <= 0) return;
+        getGameCategories(file).forEach((category) => {
+            categoryPlayTimes[category] = (categoryPlayTimes[category] || 0) + entry.timePlayedMs;
+        });
+    });
+
+    return categoryPlayTimes;
+}
+
+function getMostPlayedCategory(categoryPlayTimes) {
+    return Object.entries(categoryPlayTimes)
+        .filter(([, timePlayedMs]) => Number.isFinite(timePlayedMs) && timePlayedMs > 0)
+        .sort((a, b) => {
+            if (b[1] !== a[1]) return b[1] - a[1];
+            return a[0].localeCompare(b[0]);
+        })[0] || null;
+}
+
+function getLeastPlayedCategory(categoryPlayTimes) {
+    return Object.entries(categoryPlayTimes)
+        .filter(([, timePlayedMs]) => Number.isFinite(timePlayedMs) && timePlayedMs > 0)
+        .sort((a, b) => {
+            if (a[1] !== b[1]) return a[1] - b[1];
+            return a[0].localeCompare(b[0]);
+        })[0] || null;
+}
+
+function renderStats() {
+    const stats = getStats();
+    const mostPlayed = getMostPlayedGame(stats.playTimes);
+    const leastPlayed = getLeastPlayedGame(stats.playTimes);
+    const categoryPlayTimes = getCategoryPlayTimes(stats.playTimes);
+    const favoriteCategory = getMostPlayedCategory(categoryPlayTimes);
+    const leastCategory = getLeastPlayedCategory(categoryPlayTimes);
+    const longestSession = stats.longestSession;
+    if (gamesPlayedValue) {
+        gamesPlayedValue.textContent = `${stats.gamesPlayed}`;
+    }
+    if (timePlayedValue) {
+        timePlayedValue.textContent = formatTimePlayed(stats.timePlayedMs);
+    }
+    if (mostPlayedValue) {
+        mostPlayedValue.textContent = mostPlayed ? `${mostPlayed.title}` : "None";
+    }
+    if (leastPlayedValue) {
+        leastPlayedValue.textContent = leastPlayed ? `${leastPlayed.title}` : "None";
+    }
+    if (favoriteCategoryValue) {
+        favoriteCategoryValue.textContent = favoriteCategory
+            ? `${favoriteCategory[0]} (${formatTimePlayed(favoriteCategory[1])})`
+            : "None";
+    }
+    if (leastCategoryValue) {
+        leastCategoryValue.textContent = leastCategory
+            ? `${leastCategory[0]} (${formatTimePlayed(leastCategory[1])})`
+            : "None";
+    }
+    if (longestSessionValue) {
+        longestSessionValue.textContent = longestSession && longestSession.title
+            ? `${longestSession.title} (${formatSessionMinutes(longestSession.timePlayedMs)})`
+            : "None";
+    }
+}
+
+function openSearchResults() {
+    const query = searchBar ? searchBar.value.trim() : "";
+    const suffix = query ? `?search=${encodeURIComponent(query)}` : "";
+    window.location.href = `index.html${suffix}`;
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+    applyTabDisguise();
+    updateDisguiseTabButton();
+    renderStats();
+    if (searchBar) {
+        searchBar.addEventListener("input", () => {
+            window.clearTimeout(searchTimer);
+            searchTimer = window.setTimeout(openSearchResults, 350);
+        });
+
+        searchBar.addEventListener("keydown", (event) => {
+            if (event.key === "Enter") {
+                event.preventDefault();
+                window.clearTimeout(searchTimer);
+                openSearchResults();
+            }
+        });
+    }
+    if (topbarDisguiseBtn) {
+        topbarDisguiseBtn.addEventListener("click", () => {
+            if (isTabDisguised()) {
+                localStorage.removeItem(TAB_DISGUISE_KEY);
+            } else {
+                localStorage.setItem(TAB_DISGUISE_KEY, "google");
+            }
+            applyTabDisguise();
+            updateDisguiseTabButton();
+        });
+    }
+    window.addEventListener("storage", renderStats);
+    window.setInterval(renderStats, 15000);
+});
+</script>
+
+</body>
+</html>

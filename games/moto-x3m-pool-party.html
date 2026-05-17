@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Moto X3M Pool Party</title>
+<link rel="icon" type="image/png" href="../game%20logos/logo.png">
+<script>
+(() => {
+    const disguised = localStorage.getItem("backdoorlabs_tab_disguise") === "google";
+    const favicon = document.querySelector('link[rel="icon"]');
+    document.title = disguised ? "Google" : document.title;
+    if (favicon) {
+        favicon.href = disguised ? "../game%20logos/google.png" : "../game%20logos/logo.png";
+    }
+})();
+</script>
+<link rel="stylesheet" href="../style.css">
+<script src="../game-categories.js"></script>
+<script src="../player-layout.js" defer></script>
+</head>
+<body class="game-page">
+<div class="topbar">
+<button class="topbar-logo-btn" type="button" onclick="goHome()">
+<img class="topbar-logo" src="../game%20logos/logo.png" alt="Backdoor Labs logo">
+</button>
+<button class="topbar-title" type="button" onclick="goHome()">Backdoor Labs</button>
+<input type="text" id="gamePageSearch" class="topbar-search" placeholder="Search games...">
+<a class="topbar-request" href="https://forms.gle/CmgoCdT6N45yGPHN9" target="_blank" rel="noopener noreferrer">Request A Game</a>
+<button id="topbarDisguiseBtn" type="button">Disguise Tab</button>
+</div>
+<div class="page">
+<div class="player-shell">
+<iframe class="player-frame" src="https://class811.github.io/g/moto-x3m-pool-party/" allowfullscreen></iframe>
+</div>
+<div class="player-meta">
+<h1 class="title">Moto X3M Pool Party</h1>
+<button class="panic-btn" type="button" onclick="activatePanic()">Panic</button>
+<button class="fullscreen-btn" type="button" onclick="toggleFullscreen()">Fullscreen</button>
+</div>
+</div>
+</body>
+</html>

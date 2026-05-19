@@ -9,7 +9,6 @@ body {
     min-height: 100vh;
     font-size: 18px;
 }
-    }
 
 body.home-page {
     --sidebar-collapsed: 76px;

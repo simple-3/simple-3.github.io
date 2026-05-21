@@ -200,7 +200,7 @@ function isTabDisguised() {
 }
 
 function applyTabDisguise() {
-    document.title = isTabDisguised() ? "Google" : "Sound Effects | Backdoor Labs";
+    document.title = isTabDisguised() ? "Google" : "Sound Effects | Simple 3.0";
     const favicon = document.querySelector('link[rel="icon"]');
     if (favicon) {
         favicon.href = isTabDisguised() ? "game%20logos/google.png" : "game%20logos/logo.png";

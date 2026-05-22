@@ -7,7 +7,7 @@
 (() => {
     const disguised = localStorage.getItem("backdoorlabs_tab_disguise") === "google";
     const favicon = document.querySelector('link[rel="icon"]');
-    document.title = disguised ? "Google" : "Backdoor Labs";
+    document.title = disguised ? "Google" : "Simple 3.0";
     if (favicon) {
         favicon.href = disguised ? "game%20logos/google.png" : "game%20logos/logo.png";
     }

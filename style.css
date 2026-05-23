@@ -281,13 +281,9 @@ body.game-page .sidebar:hover .sidebar-label {
 /* Title */
 .topbar .title {
   font-family: "Press Start 2P", system-ui;
-  font-weight: 400;
-  font-style: normal;
-}
-
-    font-size: 1.85rem;
-    color: #a39bff;
-    font-weight: bold;
+  font-size: 1.85rem;
+  color: #a39bff;
+  font-weight: 400px;
 }
 
 .topbar .home-title {

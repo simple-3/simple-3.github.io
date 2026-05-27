@@ -1150,3 +1150,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
     renderRecommendations();
 });
+// main.js
+
+window.addEventListener("beforeunload", (event) => {
+  event.preventDefault();
+  event.returnValue = "";
+});

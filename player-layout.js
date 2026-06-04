@@ -93,6 +93,11 @@ const GAME_PAGES = [
         "title": "Geometry Dash SubZero"
     },
     {
+        "file": "bit-planes.html",
+        "logo": "../game%20logos/bit-planes.png",
+        "title": "Bit Planes"
+    },
+    {
         "file": "block-blast.html",
         "logo": "../game%20logos/block-blast.png",
         "title": "Block Blast"

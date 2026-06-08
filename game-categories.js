@@ -14,7 +14,7 @@ window.GAME_CATEGORIES = Object.freeze({
     "games/wordle.html": "Puzzle",
     "games/five-nights-at-epstein's.html": "Horror",
     "games/geometry-dash-subzero.html": "Platformer",
-    "games/bit-planes.html": "Dogfighting",
+    "games/bit-planes.html": "Fighter",
     "games/block-blast.html": "Puzzle",
     "games/plants-vs-zombies.html": "Tower Defense",
     "games/subway-surfers.html": "Runner",
